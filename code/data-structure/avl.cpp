@@ -1,10 +1,10 @@
 #include<iostream>
 #include<cstdlib>
+#include<cstdio>
+#include<string.h>
 using namespace std;
-
 typedef struct node *avl;
 typedef struct node *position;
-
 struct node
 {
     int data;
@@ -40,23 +40,24 @@ position findmax(avl t)
 
 position singleft(position k3)
 {
+    //保存左节点
     position k2=k3->left;
     k3->left=k2->right;
     k2->right=k3;
+    //调整树高度
     k3->h=1+max(high(k3->left),high(k3->right));
     k2->h=1+max(high(k2->left),high(k3));
-
     return k2;
 }
 
 position singright(position k3)
 {
+    //保存右节点
     position k2=k3->right;
     k3->right=k2->left;
     k2->left=k3;
     k3->h=1+max(high(k3->left),high(k3->right));
     k2->h=1+max(high(k2->right),high(k3));
-
     return k2;
 }
 
@@ -93,7 +94,10 @@ avl _insert(avl t,int x)
         {
             if(x<t->left->data)
                 t=singleft(t);
-            else  t=doubleleft(t);
+            else{
+                t->left=singright(t->left);
+                t=singleft(t);
+            }
         }
     }
     else if(x>t->data)
@@ -103,21 +107,24 @@ avl _insert(avl t,int x)
         {
             if(x>t->right->data)
                 t=singright(t);
-            else  t=doubleright(t);
+            else{
+                t->right=singleft(t->right);
+                t=singright(t);
+            }
         }
     }
 
     t->h=1+max(high(t->left),high(t->right));
     return t;
 }
-
 void dfs(avl l)
 {
     if(l==NULL)
         return ;
-    cout<<l->data<<" "<<l->h<<endl;
+
     if(l->left)
         dfs(l->left);
+      cout<<l->data<<" "<<l->h<<endl;
     if(l->right)
         dfs(l->right);
 }
@@ -201,23 +208,22 @@ avl _delete(avl t,int x)
 
 int main()
 {
+    char a = 'a';
     avl t=NULL;
     int n,x;
     cin>>n;
-    for(int i=0;i<n;i++){
+    for(int i=0;i<n;i++)
+    {
         cin>>x;
         t=_insert(t,x);
     }
-
     dfs(t);
-
-    cin>>n;
+    /*cin>>n;
     while(n--){
         cin>>x;
         t=_delete(t,x);
     }
-
     _free(t);
-
+    */
     return 0;
 }
