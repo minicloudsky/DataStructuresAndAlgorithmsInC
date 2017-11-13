@@ -23,13 +23,13 @@ void up(int x)
 }
 void down(int x)
 {
-    int child;//
-    for(int i=x;i<h.top-1;i=child){
+    int child;
+    for(int i=x;i<h.top-1;i=child)
+    {
         child=i*2;
         if(child>h.top)  break;
-        if(child<=h.top-1&&h.arr[child+1]<h.arr[child]){
+        if(child<=h.top-1&&h.arr[child+1]<h.arr[child])
             child++;
-        }
         if(h.arr[child]<h.arr[i]){
             swap(h.arr[child],h.arr[i]);
         }else{

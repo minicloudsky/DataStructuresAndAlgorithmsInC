@@ -1,80 +1,79 @@
-#include<stdio.h>
-#include<stdlib.h>
+//调整一次树的位置，就要判断下影响，需不需要上浮或下降
+//最小堆，注意调整位置，注意是向下调整还是向上调整
 #include<iostream>
-#define minsize 100
-#define mindata -1000
+#include<stdlib.h>
+#define mindata -99
 using namespace std;
-typedef struct Heap *PriorityQueue;
-/*
-struct Heap
+typedef struct heap
 {
-    int top;
-    int size;
-    int *element;
+  int *arr;
+  int top;
+  int size;
 };
-PriorityQueue init(int size,int capacity)
+heap h;
+heap init(heap *h,int len)
 {
-    PriorityQueue h;
-    h->element = (int*) malloc(sizeof(size));
-    h->size = 0;
-    h->top = -9999;
+    h->arr = (int*) malloc(len*sizeof(int));
+    h->size = len;
+    h->top = 0;
+    h->arr[0] = mindata;
 }
-void up(PriorityQueue h)
+void up(int x)
 {
-    int i= h->size;
-    while(h->size>0)
-    {
-        if(h->element[i]<h->element[i/2])
-            swap(h->element[i],h->element[i/2]);
-        i = i/2;
+    //将子节点和根节点比较，比根节点小就交换
+    for(int i = x;i>1&&h.arr[i]<h.arr[i/2];i/=2)
+        swap(h.arr[i],h.arr[i/2]);
+}
+void down(int x)
+{
+    int child,i;
+    //child保存树左节点
+    for(i = x;i<h.top-1;i = child){
+        child = 2*i;
+        if(child > h.top)
+            break;
+        //如果右节点小于左节点，将右节点和根节点比较，找出最小的进行交换
+        if(child <= h.top-1&&h.arr[child+1]<h.arr[child])
+            child++;
+        if(h.arr[child]< h.arr[i]){
+            swap(h.arr[child],h.arr[i]);
+        }
+        else
+            break;
     }
 }
-void down(PriorityQueue h)
+void insert(int x)
 {
-    int i = 0;
-    while(h->size>0)
-    {
-        if(h->element[i] <  )
-    }
+    h.arr[++h.top] = x;
+    //插入新值以后，调整位置，需要将新节点与以上根节点比较，所以up()
+    up(h.top);
 }
-void push(PriorityQueue h,int x)
+int empty()
 {
-
+    return h.top==0;
 }
-int Pop(PriorityQueue h)
+int get_min()
 {
-
-}
-int getTop(PriorityQueue h)
-{
-    return h->element[h->size];
+    int m = h.arr[1];
+    swap(h.arr[1],h.arr[h.top]);
+    h.top--;
+    //删除根节点:将根节点和尾部节点交换，然后从根节点开始下降，调整树下降
+    down(1);
+    return m;
 }
 int main()
 {
-    PriorityQueue h = init();
-
-    return 0;
-}
-*/
-
-int n;
-
-void dfs(int cur)
-{
-    if(n==cur)
-        return ;
-
-    cout<<cur<<endl;
-
-    dfs(cur+1);
-
-    cout<<cur+1<<endl;
-
-}
-
-int main()
-{
+    int n,x;
     cin>>n;
-    dfs(0);
+    init(&h,n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>x;
+        insert(x);
+    }
+    while(!empty())
+    {
+        cout<<get_min()<<endl;
+    }
     return 0;
 }
