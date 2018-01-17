@@ -6,6 +6,7 @@
 using namespace std;
 struct myCmp
 {
+    //重载 '()' 操作符定义运算符优先级
     bool operator() (const int &a,const int &b)
     {
         return a>b;

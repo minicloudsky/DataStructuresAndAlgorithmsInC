@@ -20,7 +20,7 @@ void merge(int List[], int low, int mid, int high)
         exit(0);
     }
     //顺序选取两个有序区的较小元素，存储到t数组中，因为是递增排序
-    while(i!=mid+1&&j!=high+1){
+    while(i<=mid&&j<high){
         if(List[i] <= List[j]){
             temp[k++] = List[i++];
         }else{
@@ -46,9 +46,7 @@ void mergeSort(int List[],int length)
     //回忆图解的过程，二路归并算法的流程，不同于递归，递归是先递归语句，然后归并函数，
     //这样归并函数是倒序执行（和递归函数执行顺序相反）
     int size = 1;
-    int low;
-    int mid;
-    int high;
+    int low,mid,high;
     //size 是标记当前各个归并序列的high-low，从1，2，4，8，……，2*size
     while(size <= length - 1){
         //从第一个元素开始扫描，low代表第一个分割的序列的第一个元素

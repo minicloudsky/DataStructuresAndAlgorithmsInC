@@ -57,7 +57,7 @@ int main()
 {
     int n,x;
     int a[6];
-    cout<<"请输入元素数量";
+    cout<<"请输入元素数量"<<endl;
     cin>>n;
     init(&h,n);
     cout<<"请输入元素"<<endl;
@@ -67,9 +67,6 @@ int main()
         insert(x);
     }
     for(int i=0;i<6;i++)
-        a[i] = getmin();
-    cout<<"堆排序后的结果为:"<<endl;
-    for(int i=0;i<6;i++)
-        cout<<a[i]<<endl;
+        cout<<getmin()<<endl;
     return 0;
 }
