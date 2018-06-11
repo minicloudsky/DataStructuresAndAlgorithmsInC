@@ -1,23 +1,21 @@
-#include<sys/types.h>
 #include<stdio.h>
 #include<unistd.h>
-int main(int argc,char *argv[])
+#include<cstdlib>
+#include<unistd.h>
+#include<sys/types.h>
+#include<pthread.h>
+int main()
 {
-    pid_t pid;
-    pid = fork(); //创建一个进程
-    if(pid < 0) //出错
-    {
-        fprintf(stdrr,"fork failed");
-        exit(-1);
+    pid_t pid = fork();
+    if(pid==0)
+        fputs("Hi i am child proc...",stdout);
+    else{
+        fputs("Child proc id is: %d\n",stdout);
+        sleep(30);
     }
-    else if(pid==0) //子进程
-    {
-        execlp("bin/ls","ls",NULL);
-    }
-    else //父进程
-    {
-        wait(NULL); //父进程等待子进程结束
-        printf("child complete");
-    }
+    if(pid==0)
+        puts("End child process.");
+    else
+        puts("End parent process.");
     return 0;
 }
