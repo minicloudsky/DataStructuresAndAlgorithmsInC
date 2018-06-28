@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<iostream>
+#include <pthread.h>
 using namespace std;
 
 /*
@@ -77,6 +78,7 @@ int *get_arr2()
 
 int main()
 {
+    /*
     int *a;
     a=get_arr();
     get_arr2();
@@ -84,6 +86,7 @@ int main()
         cout<<a[i]<<" ";
     }
     cout<<endl;
-
+*/
+    pthread_create();
     return 0;
 }
