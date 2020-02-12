@@ -388,3 +388,4 @@ MigrationBackup/
 .ionide/
 bin/
 obj/
+cmake-build-debug/
