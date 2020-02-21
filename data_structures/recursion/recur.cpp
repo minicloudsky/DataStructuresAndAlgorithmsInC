@@ -11,10 +11,10 @@
 
 void up_and_down(int);
 
-//int main() {
-//    up_and_down(1);
-//    return 0;
-//}
+int main() {
+    up_and_down(1);
+    return 0;
+}
 
 void up_and_down(int n) {
     printf("Level %d: n location %p\n", n, &n);

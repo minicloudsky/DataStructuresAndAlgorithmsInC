@@ -10,7 +10,7 @@ int main() {
 
 void up_and_down(int n) {
     printf("Level %d: n location %p\n", n, &n);
-    if (n < 4) {
+    if (n < 400) {
         up_and_down(n + 1);
     }
     printf("LEVEL %d: n location %p\n", n, &n);
