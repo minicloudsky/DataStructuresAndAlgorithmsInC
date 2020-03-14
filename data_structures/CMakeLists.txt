@@ -3,4 +3,4 @@ project(data_structures)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(data_structures main.cpp link_list/singlel_inklist.cpp recursion/recur.cpp)
+add_executable(data_structures main.cpp 线性表/linar_list.cpp)
